@@ -8,9 +8,9 @@ A solução foi divida em quatro projetos, são eles:
 - API
 	- A primeira camada da aplicação fica aqui, onde o core da aplicação é exposto para consumo. Esse projeto possui referência do projeto de Domínio, expondo suas interfaces de serviço via injeção de dependência no contrutor do ConsolidadoController. As models utilizadas trafegam entre API e Domínio utilizando conversão de objetos com a utilização da biblioteca do AutoMapper. Essa e outras bibliotecas são acessadas via referência do projeto de domínio que por sua vez referencia o projeto de Infra, onde todas as bibliotecas foram instaladas.
 - Domínio
-	- A segunda camada da aplicação, e a principal, fica no projeto do Domínio, é lá que todos os requisitos do desafio proposto foram implementados. Esse projeto possui referência do projeto de Infra, e consome outras bibliotecas através dessa referência. A camanda de domínio expoe suas implementações através das classes de serviço e suas interfaces.
+	- A segunda camada da aplicação, e a principal, fica no projeto do Domínio, é lá que todos os requisitos do desafio proposto foram implementados. Esse projeto possui referência do projeto de Infra, e consome outras bibliotecas através dessa referência. A camanda de domínio expõe suas implementações através das classes de serviço e suas interfaces.
 - Infra
-	- A terceira camada da aplicação fica no projeto de Infra, onde todas as dependencias de pacotes ficam instaladas, abstraindo o resto da aplicação de uma dependencia direta com outras bibliotecas. Nessa camada ainda temos as implementações de duas tecnologias, utilização de cache e requisições HTTP.
+	- A terceira camada da aplicação fica no projeto de Infra, onde todas as dependencias de pacotes ficam instaladas, abstraindo o resto da aplicação de uma dependencia direta com outras bibliotecas. Nessa camada ainda temos as implementações de dois recursos, utilização de cache e requisições HTTP.
 - Testes
 	- O projeto de testes é uma camada exclusiva para as implementações de testes. Ele possui referência para os projetos de Domínio e Infra.
 
