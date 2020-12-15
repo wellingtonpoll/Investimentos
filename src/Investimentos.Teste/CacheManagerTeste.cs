@@ -71,5 +71,21 @@ namespace Investimentos.Teste
             //Then
             Assert.Throws<ArgumentNullException>(() => new MemoryCacheProvider(null));
         }
+
+        [Fact(DisplayName = "NEXT DAY 0 HOUR - Obtém timespan relativo a data corrente até o dia seguinte 00:00")]
+        [Trait("Categoria", "CACHE MANAGER")]
+        public void Cache_Manager_Next_Day_0_Hour()
+        {
+            //Given
+            var cacheManager = new CacheManager(_mockLogger.Object, _mockCacheProvider.Object);
+            var timeSpanEsperado = TimeSpan.FromHours(DateTime.Today.AddDays(1).Subtract(DateTime.Now).TotalHours);
+
+            //When
+            var timespanNextDay0Hours = cacheManager.NextDay0Hours();
+            var diferenca = Math.Truncate(timespanNextDay0Hours.Subtract(timeSpanEsperado).TotalMinutes);
+
+            //Then
+            Assert.Equal(0, diferenca);
+        }
     }
 }

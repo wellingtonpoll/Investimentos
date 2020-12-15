@@ -1,5 +1,4 @@
 ﻿using Investimentos.Dominio.ValueObjects;
-using MongoDB.Bson;
 using System;
 
 namespace Investimentos.Dominio.Entities.Base
@@ -46,17 +45,20 @@ namespace Investimentos.Dominio.Entities.Base
 
         private bool VencimentoOcorreEmAteTresMeses()
         {
-            var mesesParaVencer = Vencimento.Subtract(DateTime.Today).Days / (365.25 / 12);
-            return mesesParaVencer <= 3;
+            var totalDiasMes = 365.25 / 12;
+            var totalDiasParaVencimento = Vencimento.Subtract(DateTime.Today).Days;
+            var totalDiasTresMeses = totalDiasMes * 3;
+
+            return totalDiasParaVencimento <= totalDiasTresMeses;
         }
 
         private bool MaisDaMetadeDoTempoEmCustodia()
         {
             var custodiaEmDiasRelativoAhCompra = Vencimento.Subtract(Compra).TotalDays;
-            var metadeCustodiaEmDiasRelativoAhCompra = Math.Truncate(custodiaEmDiasRelativoAhCompra / 2);
+            var metadeCustodiaEmDiasRelativoAhCompra = custodiaEmDiasRelativoAhCompra / 2;
             var custodiaEmDiasRelativoAhDataResgate = DateTime.Today.Subtract(Compra).TotalDays;
 
-            return custodiaEmDiasRelativoAhDataResgate >= metadeCustodiaEmDiasRelativoAhCompra;
+            return custodiaEmDiasRelativoAhDataResgate > metadeCustodiaEmDiasRelativoAhCompra;
         }
     }
 }
