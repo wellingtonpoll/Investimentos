@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>818be056-33b6-4efc-a68c-603b7e177221</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..</DockerfileContext>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Investimentos.Dominio\Investimentos.Dominio.csproj" />
+    <ProjectReference Include="..\Investimentos.Infra\Investimentos.Infra.csproj" />
+  </ItemGroup>
+
+</Project>
