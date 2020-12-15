@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Investimentos.Infra.Cache.Exceptions;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using RestSharp;
 using System;
@@ -9,8 +10,8 @@ namespace Investimentos.Infra.Rest
     public class RestManager : IRestManager
     {
         private readonly ILogger<RestManager> _logger;
-        public RestManager(
-            ILogger<RestManager> logger)
+
+        public RestManager(ILogger<RestManager> logger)
         {
             _logger = logger;
         }
@@ -19,11 +20,14 @@ namespace Investimentos.Infra.Rest
         {
             try
             {
-                var restClient = new RestClient(url);
+                var _restClient = new RestClient(url);
                 var request = new RestRequest(Method.GET);
                 _logger.LogInformation("Realizando http request: {@Request}", request);
-                var response = await restClient.ExecuteAsync(request);
+                var response = await _restClient.ExecuteAsync(request);
                 _logger.LogInformation("Response: {@Response}", response);
+
+                if (!string.IsNullOrEmpty(response.ErrorMessage))
+                    _logger.LogError(response.ErrorMessage);
 
                 return JsonConvert.DeserializeObject<T>(response.Content);
             }

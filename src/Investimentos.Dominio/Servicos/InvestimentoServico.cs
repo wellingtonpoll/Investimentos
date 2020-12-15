@@ -58,7 +58,7 @@ namespace Investimentos.Dominio.Servicos
 
             // Armazena os dados sincronizados no cache
             // var tempoDeVidaNoCache = _cacheManager.NextDay0Hours();
-            var tempoDeVidaNoCache = TimeSpan.FromSeconds(5);
+            var tempoDeVidaNoCache = TimeSpan.FromSeconds(10);
             _cacheManager.WriteAsync(investimentos, CacheKey.InvestimentoConsolidado(), tempoDeVidaNoCache);
 
             // Retorna os investimentos consolidados
